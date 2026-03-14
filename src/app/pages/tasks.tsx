@@ -55,32 +55,32 @@ export function Tasks() {
   };
 
   return (
-    <div className="p-4 max-w-lg mx-auto">
-      <h2 className="text-xl font-semibold mb-4 text-purple-900">My Tasks</h2>
+    <div className="p-8 max-w-6xl mx-auto">
+      <h2 className="text-3xl font-bold mb-4 text-purple-900">My Tasks</h2>
 
       {/* Filter */}
-      <div className="flex gap-2 mb-6">
+      <div className="flex gap-3 mb-6">
         {(["all", "short-term", "long-term"] as const).map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+            className={`px-6 py-3 rounded-lg font-medium transition-colors ${
               filter === f
-                ? "bg-purple-600 text-white"
-                : "bg-white text-gray-700 hover:bg-purple-50"
+                ? "bg-purple-600 text-white shadow-md"
+                : "bg-white text-gray-700 hover:bg-purple-50 shadow-sm"
             }`}
           >
-            {f === "all" ? "All" : f === "short-term" ? "Short-term" : "Long-term"}
+            {f === "all" ? "All Tasks" : f === "short-term" ? "Short-term" : "Long-term"}
           </button>
         ))}
       </div>
 
       {/* Grouped Tasks */}
-      <div className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {Array.from(grouped.entries()).map(([category, categoryTasks]) => (
-          <div key={category} className="bg-white rounded-xl shadow-md p-4">
-            <h3 className="font-semibold mb-3 flex items-center gap-2">
-              <Badge className={getCategoryColor(category)}>
+          <div key={category} className="bg-white rounded-xl shadow-md p-6">
+            <h3 className="font-semibold mb-4 flex items-center gap-2 text-lg">
+              <Badge className={`${getCategoryColor(category)} text-base px-3 py-1`}>
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </Badge>
               <span className="text-sm text-gray-500">
@@ -88,7 +88,7 @@ export function Tasks() {
               </span>
             </h3>
 
-            <div className="space-y-2">
+            <div className="space-y-3">
               {categoryTasks.map((task) => (
                 <div
                   key={task.id}

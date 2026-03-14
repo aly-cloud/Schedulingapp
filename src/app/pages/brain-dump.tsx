@@ -75,24 +75,25 @@ export function BrainDump() {
   };
 
   return (
-    <div className="p-4 max-w-lg mx-auto">
+    <div className="p-8 max-w-6xl mx-auto">
       <div className="mb-6">
-        <h2 className="text-xl font-semibold mb-2 text-purple-900">Brain Dump</h2>
-        <p className="text-sm text-gray-600 mb-4">
+        <h2 className="text-3xl font-bold mb-2 text-purple-900">Brain Dump</h2>
+        <p className="text-gray-600 mb-4">
           Add all your tasks - AI will help organize them!
         </p>
 
         {/* Input */}
-        <div className="flex gap-2 mb-4">
+        <div className="flex gap-2 mb-4 max-w-2xl">
           <Input
             placeholder="Add a task..."
             value={newTaskTitle}
             onChange={(e) => setNewTaskTitle(e.target.value)}
             onKeyPress={(e) => e.key === "Enter" && addTask()}
-            className="flex-1"
+            className="flex-1 h-12 text-lg"
           />
-          <Button onClick={addTask} size="icon" className="bg-purple-600 hover:bg-purple-700">
-            <Plus className="w-5 h-5" />
+          <Button onClick={addTask} size="lg" className="bg-purple-600 hover:bg-purple-700 h-12 px-6">
+            <Plus className="w-5 h-5 mr-2" />
+            Add Task
           </Button>
         </div>
 
@@ -100,19 +101,20 @@ export function BrainDump() {
         {tasks.length > 0 && (
           <Button
             onClick={aiOrganize}
-            className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 mb-4"
+            size="lg"
+            className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 mb-4"
           >
-            <Sparkles className="w-4 h-4 mr-2" />
+            <Sparkles className="w-5 h-5 mr-2" />
             AI Organize
           </Button>
         )}
       </div>
 
       {/* Task Bubbles */}
-      <div className="relative min-h-[400px]">
+      <div className="relative min-h-[600px] bg-white rounded-xl shadow-lg p-8">
         <AnimatePresence>
           {tasks.map((task, index) => {
-            const radius = 150;
+            const radius = 200;
             const angle = (index * 360) / tasks.length;
             const x = Math.cos((angle * Math.PI) / 180) * radius;
             const y = Math.sin((angle * Math.PI) / 180) * radius;
@@ -130,7 +132,7 @@ export function BrainDump() {
                 exit={{ scale: 0, opacity: 0 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 drag
-                dragConstraints={{ left: -200, right: 200, top: -200, bottom: 200 }}
+                dragConstraints={{ left: -300, right: 300, top: -300, bottom: 300 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setSelectedTask(task)}
@@ -138,10 +140,10 @@ export function BrainDump() {
               >
                 <div
                   className={`
-                    px-4 py-3 rounded-full shadow-lg
+                    px-6 py-4 rounded-full shadow-lg
                     bg-gradient-to-br ${getCategoryColor(task.category)}
-                    text-white font-medium text-sm
-                    min-w-[100px] max-w-[150px]
+                    text-white font-medium text-base
+                    min-w-[140px] max-w-[200px]
                     text-center
                     border-2 border-white/30
                   `}
@@ -160,21 +162,21 @@ export function BrainDump() {
           initial={{ y: "100%" }}
           animate={{ y: 0 }}
           exit={{ y: "100%" }}
-          className="fixed inset-x-0 bottom-16 bg-white rounded-t-3xl shadow-2xl p-6 max-w-lg mx-auto border-t-4 border-purple-500"
+          className="fixed inset-x-0 bottom-0 bg-white rounded-t-3xl shadow-2xl p-8 max-w-2xl mx-auto border-t-4 border-purple-500"
         >
-          <div className="flex justify-between items-start mb-4">
-            <h3 className="text-lg font-semibold">{selectedTask.title}</h3>
+          <div className="flex justify-between items-start mb-6">
+            <h3 className="text-2xl font-semibold">{selectedTask.title}</h3>
             <Button
               variant="ghost"
               size="icon"
               onClick={() => deleteTask(selectedTask.id)}
               className="text-red-500 hover:text-red-700 hover:bg-red-50"
             >
-              <Trash2 className="w-5 h-5" />
+              <Trash2 className="w-6 h-6" />
             </Button>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-6">
             {/* Category */}
             <div>
               <label className="text-sm font-medium text-gray-700 block mb-1">
