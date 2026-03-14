@@ -17,7 +17,7 @@ export function Layout() {
       <aside className="w-64 bg-white border-r border-purple-200 shadow-lg flex flex-col">
         <div className="p-6 border-b border-purple-200">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-            Schedule AI
+            Passionfruit
           </h1>
           <p className="text-sm text-gray-600 mt-1">Your intelligent day planner</p>
         </div>
